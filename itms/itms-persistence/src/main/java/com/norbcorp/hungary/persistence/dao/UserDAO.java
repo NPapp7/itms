@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
@@ -31,6 +32,7 @@ public class UserDAO {
 	}
 	
 	public UserDTO getUserByUserName(String userName){
+		try{
 		Query query = em.createNamedQuery("ItmsUser.findUserByName");
 		query.setParameter("name", userName);
 		ItmsUser itmsUser = (ItmsUser)query.getSingleResult();
@@ -41,6 +43,7 @@ public class UserDAO {
 		userDTO.setRegisteredDate(itmsUser.getRegisteredDate());
 		userDTO.setUserId(itmsUser.getId());
 		return userDTO;
+		}catch(NoResultException nre){return null;}
 	}
 	
 	public List<UserDTO> getUsers(){

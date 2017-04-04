@@ -17,6 +17,8 @@ import com.norbcorp.hungary.itms.service.DefaultUserService;
 @ViewScoped
 public class UserBean implements Serializable{
 
+	private static final long serialVersionUID = 1L;
+
 	@Inject
 	private DefaultUserService defaultUserService;
 	
@@ -60,13 +62,5 @@ public class UserBean implements Serializable{
 
 	public void setUsers(List<UserDTO> users) {
 		this.users = users;
-	}
-
-	public DefaultUserService getDefaultUserService() {
-		return defaultUserService;
-	}
-
-	public void setDefaultUserService(DefaultUserService defaultUserService) {
-		this.defaultUserService = defaultUserService;
 	}
 }
