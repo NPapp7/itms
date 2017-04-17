@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:em="http://java.sun.com/jsf/composite/components"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>${app['UserList.title']}</title>
+	<meta name="viewport" content="width = device-width, initial-scale = 1" />
+	<h:outputStylesheet library="css" name="bootstrap.css" />
+	<h:outputStylesheet library="css" name="bootstrap-theme.min.css" />
+	<h:outputStylesheet library="css" name="bbootstrap-theme.css" />
+</h:head>
+<h:body>
+			<div class="container" role="main">
+				<h:form>
+					<em:menu menu="menu"></em:menu>
+				</h:form>
+				<br /> <br />
+				<h1>${app['UserList.title']}!</h1>
+				<h:form class="horizontal">
+					<div class="form-group">
+						<div class="row">
+							<div class="col-sm-2">
+								<h:outputLabel value="#{app['UserList.datatable.username']}" />
+								<h:inputText value="#{userManagementBean.user.name}" />
+							</div>
+							<div class="col-sm-2">
+								<h:outputLabel value="#{app['UserList.datatable.password']}" />
+								<h:inputText value="#{userManagementBean.user.password}" />
+							</div>
+							<div class="col-sm-2">
+								<h:outputLabel value="#{app['UserList.datatable.role']}]" />
+								<h:selectOneMenu value="#{userManagementBean.user.role}">
+									<f:selectItem itemValue="Admin"
+										itemLabel="Admin" />
+									<f:selectItem itemValue="User"
+										itemLabel="User" />
+								</h:selectOneMenu>
+							</div>
+							<div class="col-sm-2">
+								<h:outputLabel value="#{app['UserList.datatable.status']}" />
+								<h:selectOneMenu value="#{userManagementBean.user.status}">
+									<f:selectItem itemValue="Active" itemLabel="Active" />
+									<f:selectItem itemValue="Passive" itemLabel="Passive" />
+								</h:selectOneMenu>
+							</div>
+							<div class="col-sm-2">
+								<h:commandButton process="@form" update=":form:radioDT"
+									action="#{userManagementBean.addUser()}" value="Add New User" />
+							</div>
+						</div>
+					</div>
+				</h:form>
+				<br />
+				<div class="row">
+					<div class="col-md-30">
+						<h:form id="form">
+							<p:dataTable id="radioDT" var="user"
+								value="${userManagementBean.users}"
+								selection="#{userManagementBean.selectedUser}"
+								styleClass="table table-striped" rowKey="#{user.userId}">
+								<f:facet name="header">
+        						   	#{app['UserList.title']}
+       						 </f:facet>
+								<p:column selectionMode="single"
+									style="width:50px;text-align:center" />
+					<!-- 			<p:column headerText="Id">
+									<h:outputText value="#{user.userId}" />
+								</p:column> -->
+								<p:column headerText="${app['UserList.datatable.username']}">
+									<h:outputText value="#{user.name}" />
+								</p:column>
+						<!-- 		<p:column headerText="${app['UserList.datatable.password']}">
+									<h:outputText value="#{user.password}" />
+								</p:column> -->
+								<p:column
+									headerText="${app['UserList.datatable.dateOfRegistration']}">
+									<h:outputText value="#{user.registeredDate}" />
+								</p:column>
+								<p:column headerText="${app['UserList.datatable.role']}">
+									<h:outputText value="#{user.role}" />
+								</p:column>
+								<p:column headerText="${app['UserList.datatable.status']}">
+									<h:outputText value="#{user.status}" />
+								</p:column>
+							<!-- <p:column
+									headerText="${app['UserList.datatable.numberOfCommnets']}">
+									<h:outputText
+										value="#{commentBean.getCommentsByUserId(user.id).size()}" />
+								</p:column> 
+								<p:column
+									headerText="${app['UserList.datatable.numberOfAssignedIssues']}">
+									<h:outputText
+										value="#{issueBean.getIssuesByAssignedUserId(user.id).size()}" />
+								</p:column>
+								<p:column
+									headerText="${app['UserList.datatable.numberOfCreatedIssues']}">
+									<h:outputText
+										value="#{issueBean.getIssuesByCreatedUserId(user.id).size()}" />
+								</p:column>
+								<p:column
+									headerText="${app['UserList.datatable.numberOfAssignedGroups']}">
+									<h:outputText
+										value="#{issueBean.getIssuesByCreatedUserId(user.id).size()}" />
+								</p:column> -->
+								<f:facet name="footer">
+									<h:commandButton action="#{UserManagementBean.deleteUser()}"
+										icon="fa-eraser"
+										value="#{app['UserList.datatable.deleteUser']}"
+										process="@form" update=":form:radioDT">
+									</h:commandButton>
+								</f:facet>
+							</p:dataTable>
+						</h:form>
+					</div>
+				</div>
+			</div>
+</h:body>
+</html>

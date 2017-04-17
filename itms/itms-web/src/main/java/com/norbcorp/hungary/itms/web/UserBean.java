@@ -1,41 +1,50 @@
 package com.norbcorp.hungary.itms.web;
 
+import java.io.IOException;
 import java.io.Serializable;
-import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.ejb.EJB;
-import javax.faces.bean.SessionScoped;
-import javax.faces.view.ViewScoped;
+import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.norbcorp.hungary.itms.model.dto.UserDTO;
 import com.norbcorp.hungary.itms.service.DefaultUserService;
+import com.norbcorp.hungary.itms.web.security.PasswordAuthentication;
 
 @Named("userBean")
-@ViewScoped
-public class UserBean implements Serializable{
+@SessionScoped
+public class UserBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Inject
 	private DefaultUserService defaultUserService;
+
+	private final static String TOKEN = "$31$";
 	
 	private String userName;
 	private String password;
 	
-	List<UserDTO> users;
-	
-	@PostConstruct
-	public void init(){
-		users=defaultUserService.getUsers();
-	}
-	
-	public String login(){
+	/**
+	 * Logged user
+	 */
+	private UserDTO currentUser;
+
+	public String login() {
 		UserDTO userDTO = defaultUserService.getUserByName(userName);
-		if(password.equals(userDTO.getPassword())){
-			return "logged";
+		if (userDTO != null) {
+			PasswordAuthentication ps = new PasswordAuthentication();
+			if (ps.authenticate(password.toCharArray(), userDTO.getPassword())) {
+				currentUser=userDTO;
+				return "logged";
+			}
+			else{
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Wrong password or username"));
+			}
 		}
 		return null;
 	}
@@ -56,11 +65,22 @@ public class UserBean implements Serializable{
 		this.password = password;
 	}
 
-	public List<UserDTO> getUsers() {
-		return users;
+	public UserDTO getCurrentUser() {
+		return currentUser;
 	}
 
-	public void setUsers(List<UserDTO> users) {
-		this.users = users;
+	public void setCurrentUser(UserDTO currentUser) {
+		this.currentUser = currentUser;
+	}
+	
+	public void logout(){
+		try {
+			ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+			ec.invalidateSession();
+			ec.redirect(ec.getRequestContextPath() + "/faces/login.xhtml");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

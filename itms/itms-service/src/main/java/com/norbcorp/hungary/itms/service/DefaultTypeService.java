@@ -7,32 +7,32 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
 
-import com.norbcorp.hungary.itms.model.dto.UserDTO;
-import com.norbcorp.hungary.persistence.dao.UserDAO;
+import com.norbcorp.hungary.itms.model.dto.TypeDTO;
+import com.norbcorp.hungary.persistence.dao.TypeDAO;
 
 @Stateless
-public class DefaultUserService {
+public class DefaultTypeService {
 
 	@Inject
-	private UserDAO userDAO;
+	private TypeDAO typeDAO;
 	
 	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
-	public UserDTO getUserByName(String userName){
-		return userDAO.getUserByUserName(userName);
+	public List<TypeDTO> getAllType(){
+		return typeDAO.getAllType();
 	}
 	
 	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
-	public UserDTO getUserById(Integer id){
-		return userDAO.getUserById(id);
+	public void addType(TypeDTO typeDTO){
+		typeDAO.addNewType(typeDTO);
 	}
 	
 	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
-	public List<UserDTO> getUsers(){
-		return userDAO.getUsers();
+	public void addType(String name){
+		typeDAO.addNewType(name);
 	}
 	
 	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
-	public void addUser(UserDTO userDTO){
-		
+	public void deleteById(Integer id){
+		typeDAO.deleteById(id);
 	}
 }

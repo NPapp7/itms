@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:em="http://java.sun.com/jsf/composite/components">
+<h:head>
+	<title></title>
+	<meta name="viewport" content="width = device-width, initial-scale = 1" />
+	<h:outputStylesheet library="css" name="bootstrap.css" />
+	<h:outputStylesheet library="css" name="bootstrap-theme.min.css" />
+	<h:outputStylesheet library="css" name="bbootstrap-theme.css" />
+</h:head>
+<h:body>
+			<div class="container" main="role">
+				<h:form>
+					<em:menu menu="menu"></em:menu>
+				</h:form>
+				<br /> <br />
+				<h1>#{app['CommentPage.title']}</h1>
+				<br />
+				<div class="row">
+					<div class="col-md-6">
+						<h:dataTable value="#{commentBean.comments}" var="comment"
+							styleClass="table table-striped">
+							<h:column>
+								<f:facet name="header">${app['CommentList.datatable.commentName']}</f:facet>
+ 	#{comment.istmUser}
+ </h:column>
+							<h:column>
+								<f:facet name="header">${app['CommentList.datatable.commentDescription']}</f:facet>
+ 	#{comment.commentDescription}
+ </h:column>
+							<h:column>
+								<f:facet name="header">${app['CommentList.datatable.commentlastModified']}</f:facet>
+ 	#{comment.lastModified}
+ </h:column><h:column>
+							<f:facet name="header">${app['CommentList.datatable.commentCreatedDate']}</f:facet>
+ 	#{comment.istmUser.name}
+ </h:column>
+						</h:dataTable>
+					</div>
+				</div>
+			</div>
+</h:body>
+</html>

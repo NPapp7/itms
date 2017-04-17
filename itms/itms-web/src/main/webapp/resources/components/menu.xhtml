@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title>This content will not be displayed</title>
+			<link rel="stylesheet" type="text/css" href="/resources/css/menu.css"/>
+	<link rel="stylesheet"
+		href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
+	<h:outputStylesheet library="css" name="bootstrap.css"  />
+	<h:outputStylesheet library="css" name="bootstrap-theme.min.css"  />
+	<h:outputStylesheet library="css" name="bbootstrap-theme.css"  />>
+</h:head>
+<h:body>
+	<composite:interface>
+		<composite:attribute name="menu" required="true" />
+	</composite:interface>
+	<composite:implementation>
+		<h:form id="menuForm">
+			<p:growl id="messages" showDetail="false" />
+
+			<p:menubar>
+				<p:menuitem value="${app['AdminMenu.home']}" icon="ui-icon-home"
+					outcome="home.xhtml"></p:menuitem>
+				<p:submenu label="${app['AdminMenu.Management']}"
+					icon="ui-icon-document">
+					<p:menuitem value=" ${app['menu.UserList']}" icon="fa fa-list"
+						outcome="usersList.xhtml"></p:menuitem>
+					<p:menuitem value=" ${app['menu.IssueList']}" icon="fa fa-list"
+						outcome="issueList.xhtml"></p:menuitem>
+					<p:menuitem value=" ${app['menu.CommentsList']}" icon="fa fa-list"
+						outcome="commentList.xhtml"></p:menuitem>
+					<p:menuitem value=" ${app['menu.ProjectsList']}" icon="fa fa-list"
+						outcome="projectList.xhtml"></p:menuitem>
+				</p:submenu>
+
+				<p:menuitem id='Logout'
+					 icon="fa fa-times">
+					 <h:form>
+					 	<h:commandButton class="button" value="${app['menu.Logout']}" action="#{userBean.logout}"></h:commandButton>
+					 </h:form>
+					 </p:menuitem>
+			</p:menubar>
+		</h:form>
+	</composite:implementation>
+</h:body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html">
+<head>
+<title>Not present in rendered output</title>
+<title>This content will not be displayed</title>
+<link rel="stylesheet" type="text/css" href="/resources/css/menu.css" />
+<link rel="stylesheet"
+	href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
+<h:outputStylesheet library="css" name="bootstrap.css" />
+<h:outputStylesheet library="css" name="bootstrap-theme.min.css" />
+<h:outputStylesheet library="css" name="bbootstrap-theme.css" />
+
+</head>
+<body>
+	<composite:interface>
+	</composite:interface>
+	<composite:implementation>
+		<h:form id="userMenu">
+			<p:growl id="messages" showDetail="false" />
+			<p:menubar>
+				<p:menuitem value="#{app['UserMenu.HomePage']}" icon="ui-icon-home"
+					outcome="welcome.xhtml"/>
+				<p:submenu label="#{app['UserMenu.Issues']}" icon="ui-icon-document">
+					<p:menuitem value="${app['UserMenu.CreateIssue']}" icon="fa fa-list"
+						outcome="createIssue.xhtml"></p:menuitem>
+					<p:menuitem value="${app['UserMenu.IssueList']}" icon="fa fa-list"
+						outcome="issueList.xhtml"></p:menuitem>
+				</p:submenu>
+
+				<p:menuitem id='Logout' icon="fa fa-times">
+					<h:form>
+						<h:commandButton class="button" value="${app['menu.Logout']}"
+							action="#{userBean.logout}"></h:commandButton>
+					</h:form>
+				</p:menuitem>
+			</p:menubar>
+		</h:form>
+	</composite:implementation>
+</body>
+</html>

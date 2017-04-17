@@ -14,7 +14,9 @@ import java.util.List;
 @Table(name="itms_user")
 @NamedQueries({
 @NamedQuery(name="ItmsUser.findAll", query="SELECT i FROM ItmsUser i"),
-@NamedQuery(name="ItmsUser.findUserByName", query="SELECT i FROM ItmsUser i where i.name=:name")
+@NamedQuery(name="ItmsUser.findUserByName", query="SELECT i FROM ItmsUser i where i.name=:name"),
+@NamedQuery(name="ItmsUser.findUserById",query="SELECT i FROM ItmsUser i where i.id=:id"),
+
 })
 public class ItmsUser implements Serializable {
 	private static final long serialVersionUID = 1L;

@@ -1,0 +1,61 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:em="http://java.sun.com/jsf/composite/components"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+<h:head>
+     <meta name = "viewport" content = "width = device-width, initial-scale = 1"/>
+	<h:outputStylesheet library="css" name="bootstrap.css"  />
+	<h:outputStylesheet library="css" name="bootstrap-theme.min.css"  />
+	<h:outputStylesheet library="css" name="bbootstrap-theme.css"  />
+</h:head>
+<h:body>
+			<div class="container" role="main">
+				<h:form>
+					<em:menu menu="menu"></em:menu>
+				</h:form>
+				<br/>
+				<br/>
+				<br/>
+				<h1>#{app['AdminHome.title']}</h1>
+				<div class="row">
+				<div class="col-md-6">
+					<table class="table table-striped">
+						<tr>
+							<td><h:outputLabel value="#{app['AdminProfile.UserName']}:" /></td><td>
+								<h:outputText value="#{userBean.currentUser.name}" /></td>
+						</tr>
+						<tr>
+							<td><h:outputLabel
+									value="#{app['AdminProfile.DateOfRegistration']}:" /></td><td>#{userBean.currentUser.registeredDate}
+							</td>
+						</tr>
+						<tr>
+							<td><h:outputLabel value="#{app['AdminProfile.Role']}:" /></td><td>
+								#{userBean.currentUser.role} </td>
+						</tr>
+						<tr>
+							<td><h:outputLabel value="#{app['AdminProfile.Status']}:" /></td><td>
+								#{userBean.currentUser.status} </td>
+						</tr>
+			<!--			<tr>
+							<td><h:outputLabel
+									value="#{app['AdminProfile.NumberOfCreatedComments']}:" /></td><td>
+								#{commentBean.getCommentsByUserId(currentUser.id).size()}</td>
+						</tr>
+						<tr>
+							<td><h:outputLabel
+									value="#{app['AdminProfile.NumberOfCreatedIssues']}:" /></td><td>
+								#{issueBean.getIssuesByCreatedUserId(currentUser.id).size()} </td>
+						</tr>
+						<tr>
+							<td><h:outputLabel
+									value="#{app['AdminProfile.NumberOfAssignedIssues']}:" /></td><td>
+								#{issueBean.getIssuesByAssignedUserId(currentUser.id).size()}</td>
+						</tr>  -->
+					</table>
+				</div>
+				</div>
+			</div>
+</h:body>
+</html>
