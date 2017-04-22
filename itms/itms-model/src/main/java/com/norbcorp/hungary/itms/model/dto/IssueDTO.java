@@ -14,6 +14,9 @@ public class IssueDTO implements Serializable{
 	private String workTime;
 	private String description;
 	
+	private StatusDTO statusDTO;
+	private TypeDTO typeDTO;
+	
 	public IssueDTO(){
 		super();
 	}
@@ -80,5 +83,21 @@ public class IssueDTO implements Serializable{
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public StatusDTO getStatusDTO() {
+		return statusDTO;
+	}
+
+	public void setStatusDTO(StatusDTO statusDTO) {
+		this.statusDTO = statusDTO;
+	}
+
+	public TypeDTO getTypeDTO() {
+		return typeDTO;
+	}
+
+	public void setTypeDTO(TypeDTO typeDTO) {
+		this.typeDTO = typeDTO;
 	}
 }

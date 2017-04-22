@@ -86,6 +86,7 @@
 				</div>
 				<br/>
 				<div class="row">
+					<h:form id="issueForm">
 					<div class="col-md-6">
 						<h:dataTable value="#{issueBean.issues}" var="issue"
 							styleClass="table table-striped">
@@ -106,12 +107,8 @@
 							 	#{issue.lastModifiedDate}
 							 </h:column>
  							<h:column>
- 								<f:facet name="header">Project name</f:facet>
- 									#{issue.istmProject.name}
- 							</h:column>
- 							<h:column>
  								<f:facet name="header">Type</f:facet>
- 									#{issue.istmType.name}
+ 									#{issue.typeDTO.name}
  							</h:column>
  							<h:column>
  								<f:facet name="header">Work time</f:facet>
@@ -119,10 +116,29 @@
  							</h:column>
  							<h:column>
  								<f:facet name="header">Status</f:facet>
- 									#{issue.istmStatus.name}
+ 									#{issue.statusDTO.name}
  							</h:column>
 						</h:dataTable>
 					</div>
+					<div class="col-xs-3 col-sm-6">
+							<h:message id="issueMessages" styleClass="errorMessage"/>
+							<br/>
+							<h:outputLabel for="issueTitle" value="#{app['IssuePage.issue.title']}" />
+							<h:inputText id="issueTitle" class="form-control" value="#{issueBean.issueDTO.title}" maxlength="20" required="true" requiredMessage="#{app['IssuePage.status.requiredMessageForName']}"/>
+							<h:outputLabel for="issueDescription" value="#{app['IssuePage.status.statusDescription']}" />
+							<h:inputTextarea id="issueDescription" class="form-control" value="#{issueBean.issueDTO.description}"/>
+							<h:outputLabel for="issueType" value="type"/>
+							<h:selectOneMenu id="issueType" value="#{issueBean.issueDTO.typeDTO}" converter="#{typeConverter}">
+								<f:selectItems value="#{typeBean.types}" var="type"  ItemValue="#{type}" itemLabel="#{type.name}"></f:selectItems>
+							</h:selectOneMenu>
+							
+							
+							<h:commandButton id="executeCommandButton" class="btn btn-primary" action="#{issueBean.addIssue()}"
+								value="#{app['IssuePage.type.add']}" >
+								<f:ajax execute="statusForm:statusName statusForm:statusDescription" render="statusForm:statusTable statusForm:statusMessages"></f:ajax>
+							</h:commandButton>
+					</div>
+					</h:form>
 				</div>
 			</div>
 </h:body>

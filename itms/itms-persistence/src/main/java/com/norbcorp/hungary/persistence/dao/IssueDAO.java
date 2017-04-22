@@ -80,5 +80,16 @@ public class IssueDAO {
 		});
 		return issueList;
 	}
+	
+	public void add(IssueDTO issueDTO){
+		ItmsIssue itmsIssue=new ItmsIssue();
+		itmsIssue.setTitle(issueDTO.getTitle());
+		itmsIssue.setDescription(issueDTO.getDescription());
+		itmsIssue.setEstimatedTime(issueDTO.getEstimatedTime());
+		itmsIssue.setWorkTime(issueDTO.getWorkTime());
+		itmsIssue.setRemainingTime(issueDTO.getRemainingDate());
+		itmsIssue.setLastModifiedDate(issueDTO.getLastModifiedDate());
+		em.persist(itmsIssue);
+	}
 
 }

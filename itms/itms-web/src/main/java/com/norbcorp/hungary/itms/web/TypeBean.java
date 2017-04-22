@@ -22,7 +22,7 @@ public class TypeBean implements Serializable{
 	private String name;
 
 	public List<TypeDTO> getTypes() {
-		List<TypeDTO> types= defaultTypeService.getAllType();
+		this.types = defaultTypeService.getAllType();
 		return types;
 	}
 

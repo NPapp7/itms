@@ -20,6 +20,7 @@ public class ItmsStatus implements Serializable {
 
 	private String description;
 
+	@Column(unique=true)
 	private String name;
 
 	//bi-directional many-to-one association to ItmsIssue
