@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -17,7 +18,10 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="itms_type")
-@NamedQuery(name="ItmsType.findAll", query="SELECT i FROM ItmsType i")
+@NamedQueries({
+	@NamedQuery(name="ItmsType.findAll", query="SELECT i FROM ItmsType i"),
+	@NamedQuery(name="ItmsType.findTypeByName", query="SELECT i FROM ItmsType i WHERE i.name=:name")
+})
 public class ItmsType implements Serializable {
 	private static final long serialVersionUID = 1L;
 

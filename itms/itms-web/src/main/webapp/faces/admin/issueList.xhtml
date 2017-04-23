@@ -88,7 +88,7 @@
 				<div class="row">
 					<h:form id="issueForm">
 					<div class="col-md-6">
-						<h:dataTable value="#{issueBean.issues}" var="issue"
+						<h:dataTable id="issueTable" value="#{issueBean.issues}" var="issue"
 							styleClass="table table-striped">
 							<h:column>
 								<f:facet name="header">${app['IssueList.datatable.issueTitle']}</f:facet>
@@ -121,21 +121,33 @@
 						</h:dataTable>
 					</div>
 					<div class="col-xs-3 col-sm-6">
-							<h:message id="issueMessages" styleClass="errorMessage"/>
+							<h:message id="issueMessages" for="executeCommandButton" styleClass="errorMessage"/>
 							<br/>
 							<h:outputLabel for="issueTitle" value="#{app['IssuePage.issue.title']}" />
-							<h:inputText id="issueTitle" class="form-control" value="#{issueBean.issueDTO.title}" maxlength="20" required="true" requiredMessage="#{app['IssuePage.status.requiredMessageForName']}"/>
+							<h:inputText id="issueTitle" class="form-control" value="#{issueBean.selectedIssueDTO.title}" maxlength="20" required="true" requiredMessage="#{app['IssuePage.status.requiredMessageForName']}"/>
 							<h:outputLabel for="issueDescription" value="#{app['IssuePage.status.statusDescription']}" />
-							<h:inputTextarea id="issueDescription" class="form-control" value="#{issueBean.issueDTO.description}"/>
+							<h:inputTextarea id="issueDescription" class="form-control" value="#{issueBean.selectedIssueDTO.description}"/>
+						
 							<h:outputLabel for="issueType" value="type"/>
-							<h:selectOneMenu id="issueType" value="#{issueBean.issueDTO.typeDTO}" converter="#{typeConverter}">
+							<h:selectOneMenu id="issueType" class="form-control" value="#{issueBean.selectedIssueDTO.typeDTO}" required="true">
 								<f:selectItems value="#{typeBean.types}" var="type"  ItemValue="#{type}" itemLabel="#{type.name}"></f:selectItems>
+								<f:converter binding="#{typeConverter}"></f:converter>
+							</h:selectOneMenu>
+	
+							<h:outputLabel for="issueStatus" value="Status"/>
+							<h:selectOneMenu id="issueStatus" class="form-control" value="#{issueBean.selectedIssueDTO.statusDTO}" required="true">
+								<f:selectItems value="#{statusBean.statuses}" var="status" ItemValue="#{status}" itemLabel="#{status.name}"></f:selectItems>
+								<f:converter binding="#{statusConverter}" />
 							</h:selectOneMenu>
 							
+							<h:outputLabel for="issueProject" value="Project"/>
+							<h:selectOneMenu id="issueProject" class="form-control" value="#{issueBean.selectedIssueDTO.projectDTO}" required="true">
+								<f:selectItems value="#{projectBean.projects}" var="project" ItemValue="#{project}" itemLabel="#{project.name}"></f:selectItems>
+								<f:converter binding="#{projectConverter}" />
+							</h:selectOneMenu>
 							
 							<h:commandButton id="executeCommandButton" class="btn btn-primary" action="#{issueBean.addIssue()}"
 								value="#{app['IssuePage.type.add']}" >
-								<f:ajax execute="statusForm:statusName statusForm:statusDescription" render="statusForm:statusTable statusForm:statusMessages"></f:ajax>
 							</h:commandButton>
 					</div>
 					</h:form>

@@ -1,7 +1,9 @@
 package com.norbcorp.hungary.persistence.dao;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -16,9 +18,14 @@ import javax.persistence.criteria.Root;
 
 import com.norbcorp.hungary.itms.model.dto.IssueDTO;
 import com.norbcorp.hungary.persistence.entities.ItmsIssue;
+import com.norbcorp.hungary.persistence.entities.ItmsProject;
+import com.norbcorp.hungary.persistence.entities.ItmsStatus;
+import com.norbcorp.hungary.persistence.entities.ItmsType;
 
 @Stateless
-public class IssueDAO {
+public class IssueDAO implements Serializable{
+	
+	private static Logger logger = Logger.getLogger(IssueDAO.class.getName());
 	
 	@PersistenceContext(name = "ITMS-PERSISTENCE")
 	private EntityManager em;
@@ -89,7 +96,30 @@ public class IssueDAO {
 		itmsIssue.setWorkTime(issueDTO.getWorkTime());
 		itmsIssue.setRemainingTime(issueDTO.getRemainingDate());
 		itmsIssue.setLastModifiedDate(issueDTO.getLastModifiedDate());
+		
+		ItmsType itmsType = em.find(ItmsType.class, issueDTO.getTypeDTO().getId());
+		logger.info("Type id:"+itmsType.getId());
+	/*	itmsType.setId(issueDTO.getTypeDTO().getId());
+		itmsType.setName(issueDTO.getTypeDTO().getName());*/
+		itmsIssue.setItmsType(itmsType);
+		
+		ItmsStatus itmsStatus = em.find(ItmsStatus.class, issueDTO.getStatusDTO().getId());
+		logger.info("Status id:"+itmsStatus.getId());
+	/*	itmsStatus.setId(issueDTO.getStatusDTO().getId());
+		itmsStatus.setName(issueDTO.getStatusDTO().getName());
+		itmsStatus.setDescription(issueDTO.getStatusDTO().getDescription());*/
+		itmsIssue.setItmsStatus(itmsStatus);
+		
+		ItmsProject itmsProject = em.find(ItmsProject.class, issueDTO.getProjectDTO().getId());
+		logger.info("Project id:"+itmsProject.getId());
+	/*	itmsProject.setId(issueDTO.getProjectDTO().getId());
+		itmsProject.setName(issueDTO.getProjectDTO().getName());
+		itmsProject.setDescription(issueDTO.getProjectDTO().getDescription());*/
+		
+		itmsIssue.setItmsProject(itmsProject);
+		
 		em.persist(itmsIssue);
+		em.flush();
 	}
 
 }

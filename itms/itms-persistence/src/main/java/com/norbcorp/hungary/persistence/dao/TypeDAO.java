@@ -57,4 +57,22 @@ public class TypeDAO implements Serializable{
 		ItmsType itmsType = em.find(ItmsType.class, typeDTO.getId());
 		itmsType.setName(typeDTO.getName());
 	}
+	
+	public TypeDTO getTypeByName(String name){
+		Query query = em.createNamedQuery("ItmsType.findTypeByName");
+		query.setParameter("name", name);
+		TypeDTO typeDTO = new TypeDTO();
+		typeDTO.setId(((TypeDTO)query.getSingleResult()).getId());
+		typeDTO.setName(((TypeDTO)query.getSingleResult()).getName());
+		return typeDTO;
+	}
+	
+	public TypeDTO getTypeById(Integer id){
+		ItmsType itmsType = em.find(ItmsType.class, id);
+		TypeDTO typeDTO = new TypeDTO();
+		typeDTO.setId(itmsType.getId());
+		typeDTO.setName(itmsType.getName());
+		return typeDTO;
+	}
+	
 }

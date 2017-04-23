@@ -21,6 +21,10 @@ public class DefaultTypeService {
 		return typeDAO.getAllType();
 	}
 	
+	public TypeDTO getTypeById(Integer id){
+		return typeDAO.getTypeById(id);
+	}
+	
 	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public void addType(TypeDTO typeDTO){
 		typeDAO.addNewType(typeDTO);

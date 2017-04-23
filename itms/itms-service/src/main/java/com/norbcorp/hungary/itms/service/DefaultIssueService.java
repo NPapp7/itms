@@ -1,24 +1,29 @@
 package com.norbcorp.hungary.itms.service;
 
+import java.io.Serializable;
+import java.util.List;
+
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
 
 import com.norbcorp.hungary.itms.model.dto.IssueDTO;
 import com.norbcorp.hungary.persistence.dao.IssueDAO;
-import com.norbcorp.hungary.persistence.dao.StatusDAO;
-import com.norbcorp.hungary.persistence.dao.TypeDAO;
 
 @Stateless
-public class DefaultIssueService {
+public class DefaultIssueService implements Serializable{
 
 	@Inject
 	private IssueDAO issueDAO;
-	@Inject 
-	private TypeDAO typeDAO;
-	@Inject
-	private StatusDAO statusDAO;
 	
+	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public void addIssue(IssueDTO issueDTO){
-		
+		issueDAO.add(issueDTO);
+	}
+	
+	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
+	public List<IssueDTO> getIssues(){
+		return issueDAO.getIssues();
 	}
 }

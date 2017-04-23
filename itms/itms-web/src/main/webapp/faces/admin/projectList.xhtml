@@ -12,8 +12,6 @@
 	<h:outputStylesheet library="css" name="bbootstrap-theme.css" />
 </h:head>
 <h:body>
-	<c:choose>
-		<c:when test="${userBean.user.role == userBean.roles[0]}">
 			<div class="container" main="role">
 				<h:form>
 					<em:menu menu="menu"></em:menu>
@@ -28,14 +26,14 @@
 							value="Name:" />
 						<div class="col-10">
 							<h:inputText id="projectNameField" class="form-control"
-								value="#{projectBean.project.name}" required="true"/>
+								value="#{projectBean.projectDTO.name}" required="true"/>
 						</div>
 					</div>
 					<div class="form-group">
 						<h:outputLabel for="projectDescriptionField"
 							class="col-2 col-form-label" value="Project description" />
 						<h:inputTextarea id="projectDescriptionField" class="form-control"
-							value="#{projectBean.project.description}" required="true" />
+							value="#{projectBean.projectDTO.description}" required="true" />
 					</div>
 					<div class="form-group">
 						<h:commandButton class="btn btn-primary" value="Modify" style="padding-left:20px"
@@ -43,7 +41,7 @@
 							<f:ajax execute="projectForm" render="projectForm"/>
 						</h:commandButton>
 						<h:commandButton id="Add" value="Add" class="btn btn-primary" 
-							action="#{projectBean.addNewProject()}">
+							action="#{projectBean.addProject()}">
 							<f:ajax execute="projectForm" render="projectForm"/>
 						</h:commandButton>
 					</div>
@@ -76,7 +74,5 @@
 					</div>
 				</h:form>
 			</div>
-		</c:when>
-	</c:choose>
 </h:body>
 </html>

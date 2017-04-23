@@ -22,6 +22,11 @@ public class DefaultStatusService {
 	}
 	
 	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
+	public StatusDTO findStatusById(Integer id){
+		return statusDAO.findStatusById(id);
+	}
+	
+	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public void addStatus(StatusDTO statusDTO){
 		statusDAO.addStatus(statusDTO);
 	}

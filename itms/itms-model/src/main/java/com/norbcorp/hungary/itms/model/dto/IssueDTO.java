@@ -16,6 +16,7 @@ public class IssueDTO implements Serializable{
 	
 	private StatusDTO statusDTO;
 	private TypeDTO typeDTO;
+	private ProjectDTO projectDTO;
 	
 	public IssueDTO(){
 		super();
@@ -99,5 +100,13 @@ public class IssueDTO implements Serializable{
 
 	public void setTypeDTO(TypeDTO typeDTO) {
 		this.typeDTO = typeDTO;
+	}
+
+	public ProjectDTO getProjectDTO() {
+		return projectDTO;
+	}
+
+	public void setProjectDTO(ProjectDTO projectDTO) {
+		this.projectDTO = projectDTO;
 	}
 }

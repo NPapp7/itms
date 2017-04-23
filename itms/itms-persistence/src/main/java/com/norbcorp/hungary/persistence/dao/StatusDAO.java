@@ -30,6 +30,16 @@ public class StatusDAO implements Serializable{
 		return statuses;
 	}
 	
+	public StatusDTO findStatusById(Integer id){
+		ItmsStatus itmsStatus=em.find(ItmsStatus.class, id);
+		StatusDTO statusDTO = new StatusDTO();
+		statusDTO.setName(itmsStatus.getName());
+		statusDTO.setId(itmsStatus.getId());
+		statusDTO.setDescription(itmsStatus.getDescription());
+		
+		return statusDTO;
+	}
+	
 	public void addStatus(StatusDTO statusDTO){
 		ItmsStatus itmsStatus=new ItmsStatus();
 		itmsStatus.setName(statusDTO.getName());
