@@ -45,6 +45,8 @@ public class IssueBean implements Serializable{
 
 	public void addIssue(){
 		logger.info("IssueBean is invoked with an issue named "+ selectedIssueDTO.getTitle());
+		logger.info(""+selectedIssueDTO.getTypeDTO().getId()+";"+selectedIssueDTO.getTypeDTO().getName());
+		logger.info(""+selectedIssueDTO.getStatusDTO().getId()+";"+selectedIssueDTO.getTypeDTO().getName());
 		defaultIssueService.addIssue(selectedIssueDTO);
 		selectedIssueDTO=new IssueDTO();
 	}

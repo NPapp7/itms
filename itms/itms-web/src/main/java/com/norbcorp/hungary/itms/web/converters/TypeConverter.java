@@ -2,6 +2,7 @@ package com.norbcorp.hungary.itms.web.converters;
 
 import java.util.logging.Logger;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
@@ -16,7 +17,7 @@ import com.norbcorp.hungary.itms.model.dto.TypeDTO;
 import com.norbcorp.hungary.itms.service.DefaultTypeService;
 
 @Named
-@RequestScoped
+@ApplicationScoped
 public class TypeConverter implements Converter{
 
 	private static Logger logger = Logger.getLogger(TypeConverter.class.getName());
@@ -40,7 +41,7 @@ public class TypeConverter implements Converter{
 	@Override
 	public String getAsString(FacesContext context, UIComponent component, Object value) {
 		if(value == null){
-			return "";
+			return null;
 		}
 		
 		if(value instanceof TypeDTO){

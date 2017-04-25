@@ -141,9 +141,9 @@
 							</h:selectOneMenu>
 							
 							<h:outputLabel for="issueProject" value="Project"/>
-							<h:selectOneMenu id="issueProject" class="form-control" value="#{issueBean.selectedIssueDTO.projectDTO}" required="true">
+							<h:selectOneMenu id="issueProject" class="form-control" value="#{projectBean.projectDTO}" required="true">
 								<f:selectItems value="#{projectBean.projects}" var="project" ItemValue="#{project}" itemLabel="#{project.name}"></f:selectItems>
-								<f:converter binding="#{projectConverter}" />
+								<f:converter binding="#{projectConverter}" /> 
 							</h:selectOneMenu>
 							
 							<h:commandButton id="executeCommandButton" class="btn btn-primary" action="#{issueBean.addIssue()}"
