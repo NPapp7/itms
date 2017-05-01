@@ -12,7 +12,7 @@
 	<h:outputStylesheet library="css" name="bbootstrap-theme.css" />
 </h:head>
 <h:body>
-			<div class="container" main="role">
+			<div class="container">
 				<h:form>
 					<em:menu menu="menu"></em:menu>
 				</h:form>
@@ -37,7 +37,7 @@
 					</div>
 					<div class="form-group">
 						<h:commandButton class="btn btn-primary" value="Modify" style="padding-left:20px"
-							action="#{projectBean.modifyProject()}">
+							action="#{projectBean.updateProject()}">
 							<f:ajax execute="projectForm" render="projectForm"/>
 						</h:commandButton>
 						<h:commandButton id="Add" value="Add" class="btn btn-primary" 
@@ -49,7 +49,8 @@
 					<div class="row">
 						<div class="col-md-6">
 							<h:dataTable id="projectTable" value="#{projectBean.projects}"
-								var="project"
+								binding="#{projectBean.datatableProjects}"
+								var="project" 
 								styleClass="table table-striped">
 								<h:column>
 									<f:facet name="header">${app['ProjectList.datatable.projectName']}</f:facet>
@@ -60,12 +61,12 @@
 								 	#{project.description}
 								 </h:column>
 								<h:column>
-									<h:commandButton id="editButton" value="Edit" actionListener="#{projectBean.selectProject}">
+									<h:commandButton id="editButton" value="Edit" actionListener="#{projectBean.modifyProject(project)}">
 										<f:ajax execute="editButton" render="projectForm"></f:ajax>
 									</h:commandButton>
 								</h:column>
 								<h:column>
-									<h:commandButton id="deleteButton" value="Delete" actionListener="#{projectBean.deleteProject}">
+									<h:commandButton id="deleteButton" value="Delete" actionListener="#{projectBean.deleteProject(project)}">
 										<f:ajax execute="deleteButton" render="projectForm"/>
 									</h:commandButton>
 								</h:column>

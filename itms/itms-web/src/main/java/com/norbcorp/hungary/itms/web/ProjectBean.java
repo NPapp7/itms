@@ -3,6 +3,7 @@ package com.norbcorp.hungary.itms.web;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.faces.component.html.HtmlDataTable;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -13,7 +14,8 @@ import com.norbcorp.hungary.itms.service.ProjectService;
 @Named("projectBean")
 @ViewScoped
 public class ProjectBean implements Serializable{
-
+	private HtmlDataTable datatableProjects;
+	
 	private static final long serialVersionUID = 1L;
 
 	@Inject
@@ -44,7 +46,24 @@ public class ProjectBean implements Serializable{
 		projectService.addProject(projectDTO);
 	}
 	
-	public void deleteProject(){
-		
+	public void deleteProject(ProjectDTO projectDTO){
+		projectService.deleteProjectById(projectDTO.getId());
+	}
+	
+	public HtmlDataTable getDatatableProjects() {
+		return datatableProjects;
+	}
+
+	public void setDatatableProjects(HtmlDataTable datatableProjects) {
+		this.datatableProjects = datatableProjects;
+	}
+	
+	public void updateProject(){
+		this.projectService.updateProject(projectDTO);
+	}
+
+	public void modifyProject(ProjectDTO projectDTO){
+		this.projectDTO=projectDTO;
+		//projectService.updateProject(projectDTO);
 	}
 }
