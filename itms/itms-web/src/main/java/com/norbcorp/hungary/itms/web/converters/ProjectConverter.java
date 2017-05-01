@@ -33,7 +33,6 @@ public class ProjectConverter implements Converter{
 			return null;
 		try{
 					ProjectDTO projectDTO = projectService.findProjectById(Integer.valueOf(value).intValue());
-					logger.info(projectDTO.getId()+"");
 					return projectDTO;
 		}catch(Exception e){
 			throw new ConverterException(new FacesMessage("Not valid id:"+value),e);

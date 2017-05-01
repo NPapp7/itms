@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
@@ -17,6 +18,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 import com.norbcorp.hungary.itms.model.dto.IssueDTO;
+import com.norbcorp.hungary.itms.model.dto.TypeDTO;
 import com.norbcorp.hungary.persistence.entities.ItmsIssue;
 import com.norbcorp.hungary.persistence.entities.ItmsProject;
 import com.norbcorp.hungary.persistence.entities.ItmsStatus;
@@ -29,6 +31,12 @@ public class IssueDAO implements Serializable{
 	
 	@PersistenceContext(name = "ITMS-PERSISTENCE")
 	private EntityManager em;
+	
+	@Inject
+	private TypeDAO typeDAO;
+	
+	@Inject
+	private StatusDAO statusDAO;
 	
 	public IssueDTO getIssueById(Integer id){
 		ItmsIssue issueEntity = (ItmsIssue) em.find(ItmsIssue.class, id);
@@ -57,6 +65,7 @@ public class IssueDAO implements Serializable{
 			issueDTO.setRemainingDate(itmsIssue.getRemainingTime());
 			issueDTO.setTitle(itmsIssue.getTitle());
 			issueDTO.setWorkTime(itmsIssue.getWorkTime());
+			
 			return issueDTO;
 		}catch(NoResultException|NonUniqueResultException nre){
 			return null;
@@ -82,6 +91,8 @@ public class IssueDAO implements Serializable{
 			dto.setRemainingDate(issue.getRemainingTime());
 			dto.setTitle(issue.getTitle());
 			dto.setWorkTime(issue.getWorkTime());
+			dto.setTypeDTO(typeDAO.getTypeById(issue.getItmsType().getId()));
+			dto.setStatusDTO(statusDAO.findStatusById(issue.getItmsStatus().getId()));
 			issueList.add(dto);
 			
 		});

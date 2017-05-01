@@ -130,18 +130,21 @@
 						
 							<h:outputLabel for="issueType" value="type"/>
 							<h:selectOneMenu id="issueType" class="form-control" value="#{issueBean.selectedIssueDTO.typeDTO}" required="true">
+								<f:selectItem itemValue="#{null}" itemLabel="" />
 								<f:selectItems value="#{typeBean.types}" var="type"  ItemValue="#{type}" itemLabel="#{type.name}"></f:selectItems>
 								<f:converter binding="#{typeConverter}"></f:converter>
 							</h:selectOneMenu>
 	
 							<h:outputLabel for="issueStatus" value="Status"/>
 							<h:selectOneMenu id="issueStatus" class="form-control" value="#{issueBean.selectedIssueDTO.statusDTO}" required="true">
+								<f:selectItem itemValue="#{null}" itemLabel="" />
 								<f:selectItems value="#{statusBean.statuses}" var="status" ItemValue="#{status}" itemLabel="#{status.name}"></f:selectItems>
 								<f:converter binding="#{statusConverter}" />
 							</h:selectOneMenu>
 							
 							<h:outputLabel for="issueProject" value="Project"/>
-							<h:selectOneMenu id="issueProject" class="form-control" value="#{projectBean.projectDTO}" required="true">
+							<h:selectOneMenu id="issueProject" class="form-control" value="#{issueBean.selectedIssueDTO.projectDTO}" required="true">
+								<f:selectItem itemValue="#{null}" itemLabel="" />
 								<f:selectItems value="#{projectBean.projects}" var="project" ItemValue="#{project}" itemLabel="#{project.name}"></f:selectItems>
 								<f:converter binding="#{projectConverter}" /> 
 							</h:selectOneMenu>

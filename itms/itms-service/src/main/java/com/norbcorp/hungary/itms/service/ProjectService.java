@@ -22,7 +22,6 @@ public class ProjectService implements Serializable{
 		return projectDAO.findAll();
 	}
 	
-	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public ProjectDTO findProjectById(Integer id){
 		return projectDAO.findById(id);
 	}

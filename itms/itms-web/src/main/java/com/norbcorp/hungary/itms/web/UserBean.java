@@ -73,14 +73,10 @@ public class UserBean implements Serializable {
 		this.currentUser = currentUser;
 	}
 	
-	public void logout(){
-		try {
-			ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
-			ec.invalidateSession();
-			ec.redirect(ec.getRequestContextPath() + "/faces/login.xhtml");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public String logout(){
+		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+		System.out.println(ec.getRequestContextPath());
+		ec.invalidateSession();
+		return "login";
 	}
 }
