@@ -29,6 +29,8 @@ public class UserBean implements Serializable {
 	private String userName;
 	private String password;
 	
+	private boolean loggedIn;
+	
 	/**
 	 * Logged user
 	 */
@@ -40,6 +42,7 @@ public class UserBean implements Serializable {
 			PasswordAuthentication ps = new PasswordAuthentication();
 			if (ps.authenticate(password.toCharArray(), userDTO.getPassword())) {
 				currentUser=userDTO;
+				loggedIn = true;
 				return "logged";
 			}
 			else{
@@ -73,7 +76,16 @@ public class UserBean implements Serializable {
 		this.currentUser = currentUser;
 	}
 	
+	public boolean isLoggedIn() {
+		return loggedIn;
+	}
+
+	public void setLoggedIn(boolean loggedIn) {
+		this.loggedIn = loggedIn;
+	}
+
 	public String logout(){
+		loggedIn=false;
 		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
 		return "login";
 	}
