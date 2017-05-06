@@ -26,4 +26,9 @@ public class DefaultIssueService implements Serializable{
 	public List<IssueDTO> getIssues(){
 		return issueDAO.getIssues();
 	}
+	
+	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
+	public void deleteById(Integer id){
+		issueDAO.deleteById(id);
+	}
 }

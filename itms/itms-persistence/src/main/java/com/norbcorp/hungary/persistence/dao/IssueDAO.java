@@ -52,6 +52,11 @@ public class IssueDAO implements Serializable{
 		return issueDTO;
 	}
 	
+	public void deleteById(Integer id){
+		ItmsIssue itmsIssue = em.find(ItmsIssue.class, id);
+		em.remove(itmsIssue);
+	}
+	
 	public IssueDTO getIssueByTitle(String name){
 		try{
 			Query query = em.createNamedQuery("ItmsIssue.findByName");
@@ -109,24 +114,12 @@ public class IssueDAO implements Serializable{
 		itmsIssue.setLastModifiedDate(issueDTO.getLastModifiedDate());
 		
 		ItmsType itmsType = em.find(ItmsType.class, issueDTO.getTypeDTO().getId());
-		logger.info("Type id:"+itmsType.getId());
-	/*	itmsType.setId(issueDTO.getTypeDTO().getId());
-		itmsType.setName(issueDTO.getTypeDTO().getName());*/
 		itmsIssue.setItmsType(itmsType);
 		
 		ItmsStatus itmsStatus = em.find(ItmsStatus.class, issueDTO.getStatusDTO().getId());
-		logger.info("Status id:"+itmsStatus.getId());
-	/*	itmsStatus.setId(issueDTO.getStatusDTO().getId());
-		itmsStatus.setName(issueDTO.getStatusDTO().getName());
-		itmsStatus.setDescription(issueDTO.getStatusDTO().getDescription());*/
 		itmsIssue.setItmsStatus(itmsStatus);
 		
 		ItmsProject itmsProject = em.find(ItmsProject.class, issueDTO.getProjectDTO().getId());
-		logger.info("Project id:"+itmsProject.getId());
-	/*	itmsProject.setId(issueDTO.getProjectDTO().getId());
-		itmsProject.setName(issueDTO.getProjectDTO().getName());
-		itmsProject.setDescription(issueDTO.getProjectDTO().getDescription());*/
-		
 		itmsIssue.setItmsProject(itmsProject);
 		
 		em.persist(itmsIssue);

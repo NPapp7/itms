@@ -35,6 +35,10 @@ public class IssueBean implements Serializable{
 		this.issues = issues;
 	}
 	
+	public void deleteIssueById(Integer id){
+		defaultIssueService.deleteById(id);
+	}
+	
 	public IssueDTO getSelectedIssueDTO() {
 		return selectedIssueDTO;
 	}
@@ -44,9 +48,6 @@ public class IssueBean implements Serializable{
 	}
 
 	public void addIssue(){
-		logger.info("IssueBean is invoked with an issue named "+ selectedIssueDTO.getTitle());
-		logger.info(""+selectedIssueDTO.getTypeDTO().getId()+";"+selectedIssueDTO.getTypeDTO().getName());
-		logger.info(""+selectedIssueDTO.getStatusDTO().getId()+";"+selectedIssueDTO.getTypeDTO().getName());
 		defaultIssueService.addIssue(selectedIssueDTO);
 		selectedIssueDTO=new IssueDTO();
 	}

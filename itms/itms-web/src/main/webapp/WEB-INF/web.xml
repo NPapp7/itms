@@ -40,11 +40,12 @@
     <url-pattern>/faces/admin/*</url-pattern>
 </filter-mapping>
  
+<error-page>
+    <location>/faces/error.xhtml</location>
+</error-page>
+ 
   <welcome-file-list>
   	<welcome-file>faces/login.xhtml</welcome-file>
   </welcome-file-list>
-  <login-config>
-  	
-  </login-config>
   
 </web-app>

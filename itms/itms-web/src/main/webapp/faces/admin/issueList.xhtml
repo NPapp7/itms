@@ -108,15 +108,21 @@
 							 </h:column>
  							<h:column>
  								<f:facet name="header">Type</f:facet>
- 									#{issue.typeDTO.name}
+ 								#{issue.typeDTO.name}
  							</h:column>
  							<h:column>
  								<f:facet name="header">Work time</f:facet>
- 									#{issue.workTime}
+ 								#{issue.workTime}
  							</h:column>
  							<h:column>
  								<f:facet name="header">Status</f:facet>
- 									#{issue.statusDTO.name}
+ 								#{issue.statusDTO.name}
+ 							</h:column>
+ 							<h:column>
+ 								<f:facet name="header">Delete</f:facet>
+ 								<h:commandButton id="deleteButton" class="btn btn-default"  action="#{issueBean.deleteIssueById(issue.id)}" value="#{app['IssuePage.status.statusDeleteButton']}">
+						 			<f:ajax execute="issueForm:deleteButton" render="issueForm:issueTable"/>
+						 		</h:commandButton>
  							</h:column>
 						</h:dataTable>
 					</div>
