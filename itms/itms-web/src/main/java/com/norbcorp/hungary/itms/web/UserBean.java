@@ -30,6 +30,7 @@ public class UserBean implements Serializable {
 	private String password;
 	
 	private boolean loggedIn;
+	private boolean isAdmin;
 	
 	/**
 	 * Logged user
@@ -40,10 +41,17 @@ public class UserBean implements Serializable {
 		UserDTO userDTO = defaultUserService.getUserByName(userName);
 		if (userDTO != null) {
 			PasswordAuthentication ps = new PasswordAuthentication();
-			if (ps.authenticate(password.toCharArray(), userDTO.getPassword())) {
+			if (ps.authenticate(password.toCharArray(), userDTO.getPassword()) && userDTO.getRole().equals("Admin")) {
 				currentUser=userDTO;
 				loggedIn = true;
-				return "logged";
+				isAdmin=true;
+				return "admin";
+			}
+			else if(ps.authenticate(password.toCharArray(), userDTO.getPassword()) && userDTO.getRole().equals("User")){
+				currentUser=userDTO;
+				loggedIn = true;
+				isAdmin=false;
+				return "user";
 			}
 			else{
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Wrong password or username"));
@@ -86,13 +94,23 @@ public class UserBean implements Serializable {
 
 	public void logout(){
 		loggedIn=false;
+		isAdmin=false;
 		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
 		ec.invalidateSession();
 		try {
 			ec.redirect(ec.getRequestContextPath() + "/faces/login.xhtml");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
+
+	public boolean isAdmin() {
+		return isAdmin;
+	}
+
+	public void setAdmin(boolean isAdmin) {
+		this.isAdmin = isAdmin;
+	}
+	
+	
 }

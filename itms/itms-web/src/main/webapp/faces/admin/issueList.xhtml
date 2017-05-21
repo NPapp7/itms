@@ -102,17 +102,9 @@
 								<f:facet name="header">${app['IssueList.datatable.createdTime']}</f:facet>
 							 	#{issue.createdDate}
 							 </h:column>
-							<h:column>
-								<f:facet name="header">${app['IssueList.datatable.lastModifiedTime']}</f:facet>
-							 	#{issue.lastModifiedDate}
-							 </h:column>
  							<h:column>
  								<f:facet name="header">Type</f:facet>
  								#{issue.typeDTO.name}
- 							</h:column>
- 							<h:column>
- 								<f:facet name="header">Work time</f:facet>
- 								#{issue.workTime}
  							</h:column>
  							<h:column>
  								<f:facet name="header">Status</f:facet>

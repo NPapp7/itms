@@ -1,6 +1,7 @@
 package com.norbcorp.hungary.itms.web.filters;
 
 import java.io.IOException;
+import java.util.logging.Logger;
 
 import javax.inject.Inject;
 import javax.servlet.Filter;
@@ -15,6 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.norbcorp.hungary.itms.web.UserBean;
 
 public class LoginFilter implements Filter{
+	
+	private static Logger logger = Logger.getLogger(LoginFilter.class.getName());
 	
 	@Inject
 	private UserBean userBean;
@@ -31,6 +34,16 @@ public class LoginFilter implements Filter{
 	        if (loginBean == null || !loginBean.isLoggedIn()) {
 	            String contextPath = ((HttpServletRequest)request).getContextPath();
 	            ((HttpServletResponse)response).sendRedirect(contextPath + "/faces/login.xhtml");
+	        } else {
+	        	HttpServletRequest httpServletrequest = (HttpServletRequest) request;
+	        	String path = httpServletrequest.getRequestURI();
+	        	if(path.contains("/admin/") && !userBean.isAdmin()){
+	        		String contextPath = ((HttpServletRequest)request).getContextPath();
+		            ((HttpServletResponse)response).sendRedirect(contextPath + "/faces/login.xhtml");
+	        	} else if(path.contains("/user/") && userBean.isAdmin()) {
+	        		String contextPath = ((HttpServletRequest)request).getContextPath();
+		            ((HttpServletResponse)response).sendRedirect(contextPath + "/faces/login.xhtml");
+	        	}
 	        }
 	         
 	        chain.doFilter(request, response);

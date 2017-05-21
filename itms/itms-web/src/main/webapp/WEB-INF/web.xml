@@ -38,6 +38,7 @@
 <filter-mapping>
     <filter-name>LoginFilter</filter-name>
     <url-pattern>/faces/admin/*</url-pattern>
+    <url-pattern>/faces/user/*</url-pattern>
 </filter-mapping>
  
 <error-page>
