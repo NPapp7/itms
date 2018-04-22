@@ -1,11 +1,10 @@
 package com.norbcorp.hungary.persistence.dao;
 
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
 import javax.ejb.Stateless;
-import javax.ejb.TransactionAttribute;
-import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
@@ -89,6 +88,12 @@ public class UserDAO {
 	}
 	
 	public void addUser(UserDTO user){
-		
+		ItmsUser iu = new ItmsUser();
+		iu.setName(user.getName());
+		iu.setPassword(user.getPassword());
+		iu.setRegisteredDate(new Date());
+		iu.setRole(user.getRole());
+		iu.setStatus(user.getStatus());
+		em.persist(iu);
 	}
 }

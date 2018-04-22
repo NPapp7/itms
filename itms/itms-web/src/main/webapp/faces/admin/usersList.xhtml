@@ -22,35 +22,35 @@
 				</h:form>
 				<br /> <br />
 				<h1>${app['UserList.title']}!</h1>
-				<h:form class="horizontal">
+				<h:form>
 					<div class="form-group">
 						<div class="row">
-							<div class="col-sm-2">
-								<h:outputLabel value="#{app['UserList.datatable.username']}" />
-								<h:inputText value="#{userManagementBean.user.name}" />
+							<div class="col-sm-5">
+								<h:outputLabel for="userName" value="#{app['UserList.datatable.username']}" />
+								<h:inputText id="userName" class="form-control" value="#{userManagementBean.user.name}" />
 							</div>
-							<div class="col-sm-2">
-								<h:outputLabel value="#{app['UserList.datatable.password']}" />
-								<h:inputText value="#{userManagementBean.user.password}" />
+							<div class="col-sm-5">
+								<h:outputLabel for="password" value="#{app['UserList.datatable.password']}" />
+								<h:inputText id="password" class="form-control" value="#{userManagementBean.user.password}" />
 							</div>
-							<div class="col-sm-2">
-								<h:outputLabel value="#{app['UserList.datatable.role']}]" />
-								<h:selectOneMenu value="#{userManagementBean.user.role}">
+							<div class="col-sm-5">
+								<h:outputLabel for="role" value="#{app['UserList.datatable.role']}" />
+								<h:selectOneMenu id="role" class="form-control" value="#{userManagementBean.user.role}">
 									<f:selectItem itemValue="Admin"
 										itemLabel="Admin" />
 									<f:selectItem itemValue="User"
 										itemLabel="User" />
 								</h:selectOneMenu>
 							</div>
-							<div class="col-sm-2">
-								<h:outputLabel value="#{app['UserList.datatable.status']}" />
-								<h:selectOneMenu value="#{userManagementBean.user.status}">
+							<div class="col-sm-5">
+								<h:outputLabel for="status" value="#{app['UserList.datatable.status']}" />
+								<h:selectOneMenu id="status" class="form-control" value="#{userManagementBean.user.status}">
 									<f:selectItem itemValue="Active" itemLabel="Active" />
 									<f:selectItem itemValue="Passive" itemLabel="Passive" />
 								</h:selectOneMenu>
 							</div>
-							<div class="col-sm-2">
-								<h:commandButton process="@form" update=":form:radioDT"
+							<div class="col-sm-5">
+								<h:commandButton process="@form" class="btn btn-primary" update=":form:radioDT"
 									action="#{userManagementBean.addUser()}" value="Add New User" />
 							</div>
 						</div>
@@ -109,7 +109,7 @@
 										value="#{issueBean.getIssuesByCreatedUserId(user.id).size()}" />
 								</p:column> -->
 								<f:facet name="footer">
-									<h:commandButton action="#{UserManagementBean.deleteUser()}"
+									<h:commandButton action="#{userManagementBean.deleteUser()}"
 										icon="fa-eraser"
 										value="#{app['UserList.datatable.deleteUser']}"
 										process="@form" update=":form:radioDT">

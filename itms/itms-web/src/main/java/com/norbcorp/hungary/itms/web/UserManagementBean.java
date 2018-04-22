@@ -2,6 +2,7 @@ package com.norbcorp.hungary.itms.web;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
@@ -14,6 +15,8 @@ import com.norbcorp.hungary.itms.service.DefaultUserService;
 @Named("userManagementBean")
 @ViewScoped
 public class UserManagementBean implements Serializable{
+	private static Logger logger = Logger.getLogger(UserManagementBean.class.getName());
+	
 	private List<UserDTO> users;
 	
 	@Inject
@@ -21,10 +24,9 @@ public class UserManagementBean implements Serializable{
 	
 	private UserDTO selectedUser;
 	
-	private UserDTO user;
+	private UserDTO user = new UserDTO();
 	
 	private String[] roles=new String[]{"Admin","User"};
-	
 
 	public List<UserDTO> getUsers() {
 		return defaultUserService.getUsers();
@@ -51,6 +53,9 @@ public class UserManagementBean implements Serializable{
 	}
 	
 	public void addUser(){
+		logger.info("New user: "+user.getName()+" "+user.getPassword()+" "+user.getRole()+" "+user.getStatus());
+		defaultUserService.addUser(user);
+		user = new UserDTO();
 	}
 
 	public UserDTO getSelectedUser() {
@@ -62,6 +67,6 @@ public class UserManagementBean implements Serializable{
 	}
 	
 	public void deleteUser(){
-		
+		defaultUserService.deleteUserById(selectedUser.getUserId());
 	}
 }

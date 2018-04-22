@@ -8,11 +8,11 @@ public class UserDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private Integer userId;
-	private String name;
-	private String password;
+	private String name = "";
+	private String password = "";
 	private Date registeredDate;
-	private String role;
-	private String status;
+	private String role = "";
+	private String status = "";
 	
 	public UserDTO() {
 		super();

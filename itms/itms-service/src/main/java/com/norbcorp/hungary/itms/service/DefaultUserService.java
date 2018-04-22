@@ -33,6 +33,11 @@ public class DefaultUserService {
 	
 	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public void addUser(UserDTO userDTO){
-		
+		userDAO.addUser(userDTO);
+	}
+	
+	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
+	public void deleteUserById(Integer id) {
+		userDAO.deleteUser(id);
 	}
 }
