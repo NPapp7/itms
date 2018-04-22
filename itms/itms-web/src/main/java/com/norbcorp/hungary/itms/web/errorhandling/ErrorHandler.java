@@ -1,5 +1,7 @@
 package com.norbcorp.hungary.itms.web.errorhandling;
 
+import java.util.logging.Logger;
+
 import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
@@ -8,28 +10,45 @@ import javax.inject.Named;
 @RequestScoped
 public class ErrorHandler {
 
+	private static Logger logger = Logger.getLogger(ErrorHandler.class.getName());
+	
 	public String getStatusCode() {
 		String val = String.valueOf((Integer) FacesContext.getCurrentInstance().getExternalContext().getRequestMap()
 				.get("javax.servlet.error.status_code"));
-		return val;
+		return val != null ? val : "";
 	}
 
 	public String getMessage() {
-		String val = (String) FacesContext.getCurrentInstance().getExternalContext().getRequestMap()
+		String val = null; 
+		try{
+		val = (String) FacesContext.getCurrentInstance().getExternalContext().getRequestMap()
 				.get("javax.servlet.error.message");
-		return val;
+		}catch(Exception e){
+			logger.warning("ERROR: "+e.getMessage());
+		}
+		return val != null ? val : "";
 	}
 
 	public String getExceptionType() {
-		String val = FacesContext.getCurrentInstance().getExternalContext().getRequestMap()
-				.get("javax.servlet.error.exception_type").toString();
-		return val;
+		String val=null;
+		try{
+			val = FacesContext.getCurrentInstance().getExternalContext().getRequestMap().get("javax.servlet.error.exception_type").toString();
+		}catch(Exception e){
+			logger.warning("ERROR: "+e.getMessage());
+		}
+		return val != null ? val : "";
 	}
 
 	public String getException() {
-		String val = (String) ((Exception) FacesContext.getCurrentInstance().getExternalContext().getRequestMap()
+		String val=null;
+		try{
+			val = (String) ((Exception) FacesContext.getCurrentInstance().getExternalContext().getRequestMap()
 				.get("javax.servlet.error.exception")).toString();
-		return val;
+		}catch(Exception e){
+			logger.warning(e.getMessage());
+			val=null;
+		}
+		return val != null ? val : "";
 	}
 
 	public String getRequestURI() {

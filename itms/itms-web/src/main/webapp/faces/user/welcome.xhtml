@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
@@ -9,14 +9,22 @@
 	<meta name="viewport" content="width = device-width, initial-scale = 1" />
 	<h:outputStylesheet library="css" name="bootstrap.css" />
 	<h:outputStylesheet library="css" name="bootstrap-theme.min.css" />
-	<h:outputStylesheet library="css" name="bbootstrap-theme.css" />
+	<h:outputStylesheet library="css" name="bootstrap-theme.css" />
 </h:head> 
 <h:body> 
 	<div class="container">
-				<h:form>
-					<em:userMenu></em:userMenu>
-				</h:form>
-		<br /> <br />
-	</div>
+		<h:form>
+			<em:userMenu></em:userMenu>
+		</h:form>
+		<br />
+		  <div class="panel panel-default">
+		 	 <div class="panel-heading">
+		  		<h:outputText value="#{app['Customer.welcome.title']}" /> 
+		 	 </div>
+		    <div class="panel-body">
+		    	<h:outputText value="#{app['Customer.welcome.Logged']} #{userBean.userName}"/>
+		    </div>
+		  </div>
+		</div>
 </h:body> 
 </html>

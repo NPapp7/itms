@@ -9,7 +9,7 @@
 	<meta name="viewport" content="width = device-width, initial-scale = 1" />
 	<h:outputStylesheet library="css" name="bootstrap.css" />
 	<h:outputStylesheet library="css" name="bootstrap-theme.min.css" />
-	<h:outputStylesheet library="css" name="bbootstrap-theme.css" />
+	<h:outputStylesheet library="css" name="bootstrap-theme.css" />
 </h:head> 
 <h:body> 
 	<div class="container">
@@ -23,24 +23,14 @@
 			<div class="form-group">
 				<div class="row">
 					<h:outputLabel for="issueTitle" value="#{app['CreateIssuePage.form.issueTitle']}"/>
-					<h:inputText id="issueTitle" class="form-control" value="#{issueBean.newIssue.title}" />
+					<h:inputText id="issueTitle" class="form-control" value="#{issueBean.selectedIssueDTO.title}" />
 				</div>
 				<div class="row">
-					<h:outputLabel for="description" value="#{app['CreateIssuePage.form.details']}" />
-					<h:inputText id="description" class="form-control" value="#{issueBean.newIssue.description}" />
+					<h:outputLabel for="description" value="#{app['IssuePage.issue.description']}" />
+					<h:inputText id="description" class="form-control" value="#{issueBean.selectedIssueDTO.description}" />
 				</div>
 				<div class="row">
-					<h:outputLabel for="type" value="Type"/>
-					<h:selectOneMenu id="type" value="#{issueBean.newIssue.istmType}">
-						<f:selectItems value="#{issueBean.types}"/>
-					</h:selectOneMenu>
-				</div>
-				<div class="row">
-					<h:outputLabel for="" value=""/>
-					
-				</div>
-				<div class="row">
-					<h:commandButton class="btn btn-primary" action="#{issueBean.createNewIssue()}" value="Submit" />
+					<h:commandButton class="btn btn-primary" action="#{issueBean.addIssue()}" value="Submit" />
 				</div>
 			</div>
 		</h:form>

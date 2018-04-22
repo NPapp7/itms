@@ -55,9 +55,10 @@ public class UserBean implements Serializable {
 			}
 			else{
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Wrong password or username"));
+				return "login";
 			}
 		}
-		return null;
+		return "login";
 	}
 
 	public String getUserName() {

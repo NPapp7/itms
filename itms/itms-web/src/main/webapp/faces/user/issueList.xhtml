@@ -1,41 +1,41 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<!DOCTYPE html> 
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:em="http://java.sun.com/jsf/composite/components"> 
+      xmlns:em="http://java.sun.com/jsf/composite/components"
+      xmlns:p="http://primefaces.org/ui"> 
 
 <h:head>
 	<meta name="viewport" content="width = device-width, initial-scale = 1" />
 	<h:outputStylesheet library="css" name="bootstrap.css" />
 	<h:outputStylesheet library="css" name="bootstrap-theme.min.css" />
-	<h:outputStylesheet library="css" name="bbootstrap-theme.css" />
+	<h:outputStylesheet library="css" name="bootstrap-theme.css" />
 </h:head> 
 <h:body> 
 <div class="container">
 				<h:form>
 					<em:userMenu></em:userMenu>
 				</h:form>
-				<br /> <br />
-			<br /> <br />
-			<h:dataTable value="#{issueBean.issues}" var="issue">
-				<h:column>
-					<f:facet name="header">Title</f:facet>
-					#{issue.title}
-				</h:column>
-				<h:column>
-					<f:facet name="header">Description</f:facet>
-					#{issue.description}
-				</h:column>
-				<h:column>
-					<f:facet name="header">Created date</f:facet>
-					#{issue.createdDate}
-				</h:column>
-				<h:column>
-					<f:facet name="header">Last modified date</f:facet>
-					#{issue.lastModifiedDate}
-				</h:column>
-			</h:dataTable>
+				<br />
+	<h:form id="issueForm">
+		<div class="row">
+			<div class="col-md-2">
+				<p:dataTable id="issueTable" value="#{issueBean.issues}" selection="#{issueBean.selectedIssueDTO}" rowKey="#{issue.id}" selectionMode="single" var="issue" class="table table-striped">
+            		<p:ajax event="rowSelect" listener="#{issueBean.selectionListener()}" update="issueForm:selectedIssue" />
+            		<p:column headerText="Title">
+            			<h:outputText value="#{issue.title}" />
+            		</p:column>
+				</p:dataTable>
+			</div>
+			<div class="col-md-8">
+				<h:panelGrid id="selectedIssue" columns="2">
+					<h:outputText value="#{issueBean.selectedIssueDTO.title}" /> <br/>
+					<h:outputText value="#{issueBean.selectedIssueDTO.description}" />
+				</h:panelGrid>
+			</div>
+		</div>
+	</h:form>
 	</div>
 </h:body> 
 </html>

@@ -23,6 +23,9 @@ public class IssueBean implements Serializable{
 	@Inject
 	private DefaultIssueService defaultIssueService;
 	
+	/**
+	 * List of issues which will be shown to the users
+	 */
 	List<IssueDTO> issues;
 	
 	private IssueDTO selectedIssueDTO=new IssueDTO();
@@ -50,5 +53,9 @@ public class IssueBean implements Serializable{
 	public void addIssue(){
 		defaultIssueService.addIssue(selectedIssueDTO);
 		selectedIssueDTO=new IssueDTO();
+	}
+	
+	public void selectionListener(){
+		logger.info(selectedIssueDTO.toString());
 	}
 }

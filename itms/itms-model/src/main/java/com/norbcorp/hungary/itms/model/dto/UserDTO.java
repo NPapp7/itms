@@ -24,6 +24,14 @@ public class UserDTO implements Serializable{
 		this.password = password;
 	}
 	
+	public UserDTO(String name, Date registeredDate, String role, String status) {
+		super();
+		this.name = name;
+		this.registeredDate = registeredDate;
+		this.role = role;
+		this.status = status;
+	}
+
 	public Integer getUserId() {
 		return userId;
 	}

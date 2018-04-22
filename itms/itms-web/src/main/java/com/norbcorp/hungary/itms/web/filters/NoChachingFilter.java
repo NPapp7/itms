@@ -28,7 +28,6 @@ public class NoChachingFilter implements Filter {
         httpResponse.setDateHeader("Max-Age", 0);
 
         chain.doFilter(request, response);
-
 	}
 
 	@Override
